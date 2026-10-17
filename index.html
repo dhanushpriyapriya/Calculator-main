@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Calculator</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #e0f2f1;
+      font-family: Arial;
+    }
+
+    .calculator {
+      background: linear-gradient(135deg, #2a9d8f, #1d6f63);
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    input {
+      width: 100%;
+      height: 70px;
+      font-size: 28px;
+      text-align: right;
+      border: none;
+      border-radius: 15px;
+      padding: 10px;
+      margin-bottom: 15px;
+      background: #cceae7;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 70px);
+      gap: 12px;
+      justify-content: center;
+    }
+
+    button {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      border: none;
+      font-size: 18px;
+      cursor: pointer;
+      background: #4db6ac;
+      color: white;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      background: #00796b;
+      transform: scale(1.08);
+    }
+
+    .equal {
+      background: #00251a;
+    }
+
+    .equal:hover {
+      background: #000;
+    }
+  </style>
+</head>
+<body>
+
+<div class="calculator">
+  <input type="text" id="result" disabled>
+
+  <div class="grid">
+    <!-- Row 1 -->
+    <button onclick="sin()">sin</button>
+    <button onclick="cos()">cos</button>
+    <button onclick="tan()">tan</button>
+    <button onclick="percentage()">%</button>
+
+    <!-- Row 2 -->
+    <button onclick="appendValue('7')">7</button>
+    <button onclick="appendValue('8')">8</button>
+    <button onclick="appendValue('9')">9</button>
+    <button onclick="appendValue('+')">+</button>
+
+    <!-- Row 3 -->
+    <button onclick="appendValue('4')">4</button>
+    <button onclick="appendValue('5')">5</button>
+    <button onclick="appendValue('6')">6</button>
+    <button onclick="appendValue('-')">−</button>
+
+    <!-- Row 4 -->
+    <button onclick="appendValue('1')">1</button>
+    <button onclick="appendValue('2')">2</button>
+    <button onclick="appendValue('3')">3</button>
+    <button onclick="appendValue('*')">×</button>
+
+    <!-- Row 5 (UPDATED) -->
+    <button onclick="appendValue('0')">0</button>
+    <button onclick="appendValue('.')">.</button>
+    <button onclick="power()">x²</button> <!-- x² moved here -->
+    <button onclick="appendValue('/')">÷</button> <!-- = moved here -->
+
+    <!-- Row 6 (UPDATED) -->
+    <button class="equal" onclick="clearResult()">AC</button>
+    <button onclick="deleteLast()">⌫</button>
+    <button onclick="sqrt()">√</button>
+    <button class="equal" onclick="calculate()">=</button> <!-- = moved here -->
+  </div>
+</div>
+
+<script>
+function appendValue(value) {
+  document.getElementById("result").value += value;
+}
+
+function clearResult() {
+  document.getElementById("result").value = "";
+}
+
+function deleteLast() {
+  let current = document.getElementById("result").value;
+  document.getElementById("result").value = current.slice(0, -1);
+}
+
+function calculate() {
+  try {
+    document.getElementById("result").value = eval(document.getElementById("result").value);
+  } catch {
+    alert("Invalid Expression");
+  }
+}
+
+function sqrt() {
+  let v = document.getElementById("result").value;
+  document.getElementById("result").value = Math.sqrt(v);
+}
+
+function power() {
+  let v = document.getElementById("result").value;
+  document.getElementById("result").value = Math.pow(v, 2);
+}
+
+function percentage() {
+  let v = document.getElementById("result").value;
+  document.getElementById("result").value = v / 100;
+}
+
+function sin() {
+  let v = document.getElementById("result").value;
+  document.getElementById("result").value = Math.sin(v);
+}
+
+function cos() {
+  let v = document.getElementById("result").value;
+  document.getElementById("result").value = Math.cos(v);
+}
+
+function tan() {
+  let v = document.getElementById("result").value;
+  document.getElementById("result").value = Math.tan(v);
+}
+</script>
+
+</body>
+</html>
